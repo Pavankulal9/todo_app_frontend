@@ -1,0 +1,75 @@
+.home{
+    @include configWithHieight(500px,100%);
+    @include configFlex(flex-start,center,column,1rem);
+    > .todo-deatils{
+        @include configWithHieight(100%,20%);
+        @include configFlex(flex-start,center,column,1rem);
+        > .input-box{
+            @include configWithHieight();
+            @include configFlex(center,center,row,0.5rem);
+            > input{
+                @include configInput(60%,auto,0.5rem,5px,1rem);
+            }
+            > button{
+                @include configButton(0.8rem 1rem,5px);
+                font-size: 0.8rem;
+                font-weight: bold;
+            }
+        }
+        >.filter-box{
+            @include configFlex(center,center,row,0.5rem);
+            > p{
+                font-weight: bold;
+            }
+            > button{
+                @include configButton(0.5rem 0.8rem,5px);
+                font-size: 0.8rem;
+            }
+        }
+    }
+    > .todo-list{
+        @include configWithHieight(100%,80%);
+        @include configFlex(flex-start,center,column,1rem);
+        padding-top: 20px;
+        overflow-y: auto;
+        @include configScrollBar();
+        > .todo{
+            @include configWithHieight(70%,auto);
+            position: relative;
+            padding: 1rem;
+            border-radius: 20px;
+            border: 2px solid $text-color;
+            @include configFlex(space-between,center,row,1rem);
+            > p{
+                width: 75%;
+                font-size: 1.2rem;
+                word-wrap: break-word;
+            }
+            > .update-box{
+                @include configWithHieight(20%,auto);
+                @include configFlex(center,center,row,1rem);
+                >input{
+                    transform: scale(1.1);
+                }
+                > button{
+                    @include configButton(0.5rem 1rem,5px);
+                    border: 1px solid $text-color;
+                    > svg{
+                        font-size: 1rem;
+                    }
+                }
+            }
+            > .pin{
+               @include configWithHieight(30px,30px);
+               @include configFlex();
+               position: absolute;
+               margin-top: -15px;
+               top: 0;
+               left: 4%;
+               background-color: $theme-1-bg-color;
+               border-radius: 50%;
+               border: 2px solid $text-color;
+            }
+        }
+    }
+}
