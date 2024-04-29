@@ -11,7 +11,7 @@ const Header = () => {
     .then(()=>
        setAuth({})
      )
-     .catch((error)=> console.log(error));
+     .catch((error)=> console.error(error));
   }
   return (
     <header className='header'>

@@ -38,7 +38,7 @@ const SignUpForm = () => {
                 }else if(error.status === 500){
                   setError("Server Error try again!");
                 }
-                console.log(error.message);
+                console.error(error.message);
             }finally{
               setLoading(false);
             }

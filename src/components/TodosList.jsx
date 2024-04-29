@@ -1,25 +1,30 @@
-import { deleteTodo, updateTodo } from '../utils/apiCalls';
 import Todo from './Todo'
 import { sortTodos } from '../utils/functions';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const TodosList = ({todos,setTodos,sortType}) => {
 
-  const handleUpdates = (todo)=>{
+  const axiosPrivate = useAxiosPrivate();
+
+  const handleUpdates = async(todo)=>{
     const newTodos = todos.filter((i)=> i._id !== todo._id);
-    updateTodo(todo)
-    .then((res)=>{ 
-       setTodos(sortTodos([res.data,...newTodos],sortType));
-    })
-    .catch((error)=> console.log(error));
+    try {
+        const response = await axiosPrivate.patch('/api/v1/todo/update',JSON.stringify({...todo}));
+        const res = await response.data;
+        setTodos(sortTodos([res.data,...newTodos],sortType));
+    } catch (error) {
+        console.error(error);
+    }
   }
 
-  const handleDelete = (_id)=>{
+  const handleDelete = async(_id)=>{
     const newTodos = todos.filter((i)=> i._id !== _id);
-    deleteTodo(_id)
-    .then(()=>{ 
-      setTodos(sortTodos([...newTodos],sortType))
-    })
-    .catch((error)=> console.log(error));
+    try {
+          await axiosPrivate.delete(`/api/v1/todo/${_id}`);
+          setTodos(sortTodos([...newTodos],sortType))
+    } catch (error) {
+          console.error(error)
+    }
   }
 
   return (

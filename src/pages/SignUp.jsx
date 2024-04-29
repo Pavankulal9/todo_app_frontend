@@ -1,4 +1,3 @@
-import React from 'react'
 import ImageComp from '../components/ImageComp'
 import Logo from "../assets/todoLogo.png";
 import SignUpForm from '../components/SignUpForm';

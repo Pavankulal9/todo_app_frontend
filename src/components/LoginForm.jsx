@@ -30,19 +30,21 @@ const LoginForm = () => {
                    const response= await loginRequest(value.username,value.password)
                     setAuth(response.data.user);
                     action.resetForm();
-                    setLoading(false);
                     navigate(from,{replace:true});
                  } catch (error) {
-                  if(error.status === 401){
-                      setError("User does not exist");
+                    if(error.status === 401){
+                      setError("User does not exist!");
                     }else if(error.status === 400){
-                      setError("User does not exist");
+                      setError("username and password missing!");
                     }else if(error.status === 500){
                       setError("Server Error");
-                    }else if(error.status === 409){
-                      setError("Invaild Password");
+                    }else if(error.status === 403){
+                      setError("Invaild Password!");
                     }
-                    setLoading(false);
+
+                    console.error(error);
+                 } finally {
+                   setLoading(false)
                  }
             }
     });

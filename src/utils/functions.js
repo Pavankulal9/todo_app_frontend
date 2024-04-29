@@ -11,3 +11,5 @@ export const sortTodos = (todos,sortType)=>{
       :[...incompleteTodos,...completedTodos]
     }
   }
+
+  
