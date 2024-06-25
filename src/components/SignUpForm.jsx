@@ -101,7 +101,7 @@ const SignUpForm = () => {
           {
             errors.password &&  touched.password ? <InputError error={errors.password}/>: null      
           }  
-        <button >{loading?"Creating":"SignUp"}</button>
+        <button type='submit'>{loading?"Creating":"SignUp"}</button>
       </form>
     </div>
   )

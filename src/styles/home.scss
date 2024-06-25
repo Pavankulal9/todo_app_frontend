@@ -8,7 +8,7 @@
             @include configWithHieight();
             @include configFlex(center,center,row,0.5rem);
             > input{
-                @include configInput(60%,auto,0.5rem,5px,1rem);
+                @include configInput(70%,auto,0.5rem,5px,1rem);
             }
             > button{
                 @include configButton(0.8rem 1rem,5px);
@@ -18,9 +18,10 @@
         }
         >.filter-box{
             @include configFlex(center,center,row,0.5rem);
-            padding: 0rem 0.5rem;
-            > p{
+            > svg{
                 font-weight: bold;
+                font-size: 1.5rem;
+                margin-right: 0.5rem
             }
             > button{
                 @include configButton(0.5rem 0.8rem,5px);
@@ -78,5 +79,12 @@
 @media(min-width:500px) {
     .home{
         width: 500px;
+        > .todo-deatils{
+            .input-box{
+                > input{
+                    width: 60%;
+                }
+            }
+        }
     }
 }

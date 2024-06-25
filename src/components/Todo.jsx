@@ -8,7 +8,7 @@ const Todo = ({todo,handleUpdates,handleDelete}) => {
         <input type="checkbox" checked={todo.isCompleted} onChange={()=> handleUpdates({...todo,isCompleted:!todo.isCompleted})}/>
         <button onClick={()=> handleDelete(todo._id)}><AiFillDelete/></button>
       </div>
-      <div className='pin' style={{backgroundColor: `${todo.pin?'red':'black'}`}} onClick={()=>handleUpdates({...todo,pin:!todo.pin})}>
+      <div className='pin' style={{backgroundColor: `${todo.pin?'red':'black'}`}} onClick={()=> handleUpdates({...todo,pin:!todo.pin})}>
         <BiPin />
       </div>
     </div>

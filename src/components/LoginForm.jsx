@@ -41,7 +41,6 @@ const LoginForm = () => {
                     }else if(error.status === 403){
                       setError("Invaild Password!");
                     }
-
                     console.error(error);
                  } finally {
                    setLoading(false)
@@ -80,7 +79,7 @@ const LoginForm = () => {
           {
             errors.password &&  touched.password ? <InputError error={errors.password}/>: null      
           }  
-        <button >{loading?"Logging In":"Login"}</button>
+        <button type='submit'>{loading?"Logging In":"Login"}</button>
       </form>
     </div>
   )
