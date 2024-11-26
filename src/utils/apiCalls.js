@@ -18,7 +18,7 @@ export const axiosPrivate = axios.create({
     withCredentials:true,
 })
 
-//*User Auth Calls
+//* User Auth Calls
 export const signUpRequest = async(name,username,email,password)=>{
     try {
         const response = await Axios.post('/api/v1/users/register',JSON.stringify({name,username,email,password}));

@@ -12,7 +12,7 @@
 
 
 .body{
-  @include configWithHieight(100vw,100vh);
+  @include boxConfig(100vw,100vh);
   overflow-y: auto;
   @include configScrollBar();
   background-color: $theme-1-bg-color;
@@ -20,17 +20,17 @@
 }
 
 .header{
-  @include configWithHieight(100%,10%);
+  @include boxConfig(100%,10%);
   background: transparent;
   backdrop-filter: $header-bd-filter;
   @include configFlex(space-between);
   > .logo{
-    @include configWithHieight(50px,50px);
+    @include boxConfig(50px,50px);
     border-radius: 50%;
     margin-left: 0.5rem;
   }
   >.logout{
-    @include configWithHieight(20%,100%);
+    @include boxConfig(20%,100%);
     text-align: right;
     margin-right: 0.5rem;
     @include configFlex(end,center,row,2rem);
@@ -42,10 +42,10 @@
 }
 
 .container{
-  @include configWithHieight(100%,90%);
+  @include boxConfig(100%,90%);
   @include configFlex(flex-start,center,column);
 }
 #image{
-  @include configWithHieight();
+  @include boxConfig();
   object-fit: contain;
 }

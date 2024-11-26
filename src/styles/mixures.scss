@@ -1,6 +1,6 @@
 @import "./color.scss";
 
-@mixin configWithHieight($w:100%,$h:100%){
+@mixin boxConfig($w:100%,$h:100%){
     width: $w;
     height: $h;
 }
@@ -23,7 +23,7 @@
 }
 
 @mixin configInput($w:auto,$h:auto,$p:none,$br:none,$f:none){
-    @include configWithHieight($w,$h);
+    @include boxConfig($w,$h);
     padding: $p;
     border-radius: $br;
     background: transparent;

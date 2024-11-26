@@ -1,11 +1,11 @@
 .home{
-    @include configWithHieight(100%,100%);
+    @include boxConfig(100%,100%);
     @include configFlex(flex-start,center,column,1rem);
-    > .todo-deatils{
-        @include configWithHieight(100%,20%);
+    > .todo-details{
+        @include boxConfig(100%,20%);
         @include configFlex(flex-start,center,column,1rem);
         > .input-box{
-            @include configWithHieight();
+            @include boxConfig();
             @include configFlex(center,center,row,0.5rem);
             > input{
                 @include configInput(70%,auto,0.5rem,5px,1rem);
@@ -30,13 +30,13 @@
         }
     }
     > .todo-list{
-        @include configWithHieight(100%,80%);
+        @include boxConfig(100%,80%);
         @include configFlex(flex-start,center,column,1rem);
         padding-top: 20px;
         overflow-y: auto;
         @include configScrollBar();
         > .todo{
-            @include configWithHieight(90%,auto);
+            @include boxConfig(90%,auto);
             position: relative;
             padding: 1rem;
             border-radius: 20px;
@@ -48,7 +48,7 @@
                 word-wrap: break-word;
             }
             > .update-box{
-                @include configWithHieight(20%,auto);
+                @include boxConfig(20%,auto);
                 @include configFlex(center,center,row,1rem);
                 >input{
                     transform: scale(1.1);
@@ -62,7 +62,7 @@
                 }
             }
             > .pin{
-               @include configWithHieight(30px,30px);
+               @include boxConfig(30px,30px);
                @include configFlex();
                position: absolute;
                margin-top: -15px;
@@ -79,7 +79,7 @@
 @media(min-width:500px) {
     .home{
         width: 500px;
-        > .todo-deatils{
+        > .todo-details{
             .input-box{
                 > input{
                     width: 60%;

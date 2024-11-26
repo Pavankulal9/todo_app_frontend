@@ -1,5 +1,5 @@
 .error{
-    @include configWithHieight(100%);
+    @include boxConfig(100%);
     @include configFlex(flex-start,left,column);
     > h2{
         color: $text-color;

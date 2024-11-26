@@ -1,45 +1,48 @@
 import { useEffect, useState } from "react";
-import AddTodos from "../components/AddTodos"
-import TodosList from "../components/TodosList"
+import AddTodos from "../components/AddTodos";
+import TodosList from "../components/TodosList";
 import Loading from "../components/Loading";
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const Home = () => {
+  const [todos, setTodos] = useState(0);
+  const [sortType, setSortType] = useState("Date");
+  const [loading, setLoading] = useState(true);
+  const axiosPrivateInterceptor = useAxiosPrivate();
 
-  const [todos,setTodos] = useState(0);
-  const [sortType,setSortType] = useState('Date');
-  const [loading,setLoading] = useState(true);
-  const axiosPrivateInpector = useAxiosPrivate();
-  
-  useEffect(()=>{
-    const getTodos = async()=>{
-        try {
-            const response = await axiosPrivateInpector.get('/api/v1/todo/getTodos');
-            const todos = await response.data;
-            setLoading(false);
-            setTodos(todos.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+  useEffect(() => {
+    const getTodos = async () => {
+      try {
+        const response = await axiosPrivateInterceptor.get(
+          "/api/v1/todo/getTodos"
+        );
+        const todos = await response.data;
+        setLoading(false);
+        setTodos(todos.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
     getTodos();
+  }, [axiosPrivateInterceptor]);
 
-  },[axiosPrivateInpector])
-  
-    
   return (
     <div className="home">
-      {
-        todos && !loading?
+      {todos && !loading ? (
         <>
-          <AddTodos setTodos={setTodos} setSortType={setSortType} sortType={sortType}/>
-          <TodosList todos={todos} setTodos={setTodos} sortType={sortType}/>
+          <AddTodos
+            setTodos={setTodos}
+            setSortType={setSortType}
+            sortType={sortType}
+          />
+          <TodosList todos={todos} setTodos={setTodos} sortType={sortType} />
         </>
-        :<Loading/>
-      }
+      ) : (
+        <Loading />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

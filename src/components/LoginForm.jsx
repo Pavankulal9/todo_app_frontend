@@ -1,88 +1,100 @@
-import { useState } from 'react'
-import { useFormik } from 'formik';
-import { loginValidation } from '../schema';
-import Input from './Input';
-import InputError from './InputError';
-import { loginRequest } from '../utils/apiCalls';
-import { useLocation, useNavigate } from 'react-router-dom';
-import useAuthContext from '../hooks/useAuth';
+import { useState } from "react";
+import { useFormik } from "formik";
+import { loginValidation } from "../schema";
+import { loginRequest } from "../utils/apiCalls";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuthContext from "../hooks/useAuth";
+import FormCreator from "./FormCreator";
+
+const initialValue = {
+  username: "",
+  password: "",
+};
+
+const inputs = [
+  {
+    name: "username",
+    type: "text",
+    label: "Username",
+    placeholder: "Enter Username",
+  },
+  {
+    name: "password",
+    type: "password",
+    label: "Password",
+    placeholder: "Enter Password",
+  },
+];
 
 const LoginForm = () => {
-    const [error,setError] = useState("");
-    const [loading,setLoading] = useState(false);
-    const [showPassword,setShowPassword] = useState(false);
-    const navigate = useNavigate();
-    const loction = useLocation();
-    const from = loction.state?.from?.pathname || '/';
-    const {setAuth} = useAuthContext();
+  const [formStateHandler, setFormStateHandler] = useState({
+    loading: false,
+    error: null,
+  });
 
-    const initialValue = {
-        username:"",
-        password:""
-    }
+  const [showPassword, setShowPassword] = useState(false);
 
-    const {values,errors,handleBlur,handleChange,touched,handleSubmit} = useFormik({
-         initialValues: initialValue,
-         validationSchema: loginValidation,
-         onSubmit: async(value,action)=>{
-                setLoading(true);
-                 try {
-                   const response= await loginRequest(value.username,value.password)
-                    setAuth(response.data.user);
-                    action.resetForm();
-                    navigate(from,{replace:true});
-                 } catch (error) {
-                    if(error.status === 401){
-                      setError("User does not exist!");
-                    }else if(error.status === 400){
-                      setError("username and password missing!");
-                    }else if(error.status === 500){
-                      setError("Server Error");
-                    }else if(error.status === 403){
-                      setError("Invaild Password!");
-                    }
-                    console.error(error);
-                 } finally {
-                   setLoading(false)
-                 }
-            }
-    });
-    
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const { setAuth } = useAuthContext();
+
+  const formik = useFormik({
+    initialValues: initialValue,
+    validationSchema: loginValidation,
+    onSubmit: async (value, action) => {
+      setFormStateHandler({
+        ...formStateHandler,
+        loading: true,
+      });
+      try {
+        const response = await loginRequest(value.username, value.password);
+        setAuth(response.data.user);
+        action.resetForm();
+        navigate(from, { replace: true });
+      } catch (error) {
+        if (error.status === 401) {
+          setFormStateHandler({
+            ...formStateHandler,
+            error: "User does not exist!",
+          });
+        } else if (error.status === 400) {
+          setFormStateHandler({
+            ...formStateHandler,
+            error: "username and password missing!",
+          });
+        } else if (error.status === 500) {
+          setFormStateHandler({
+            ...formStateHandler,
+            error: "Server Error",
+          });
+        } else if (error.status === 403) {
+          setFormStateHandler({
+            ...formStateHandler,
+            error: "Invalid Password!",
+          });
+        }
+        console.error(error);
+      } finally {
+        setFormStateHandler({
+          ...formStateHandler,
+          loading: false,
+        });
+      }
+    },
+  });
+
   return (
-    <div className='form'>
-       {
-          error.length > 0 && <InputError error={error}/>
-        }
-      <form onSubmit={handleSubmit}>
-        <Input
-          label={'User-name'}
-          placeholder={'Enter username'}
-          name={'username'}
-          value={values.username}
-          handleChange={handleChange}
-          handleBur={handleBlur}
-        />
-        {
-            errors.username &&  touched.username ? <InputError error={errors.username}/>: null      
-        }
-        <Input
-          type={`${showPassword?"text":"password"}`}
-          label={'Password'}
-          placeholder={'Enter password'}
-          name={'password'}
-          value={values.password}
-          handleChange={handleChange}
-          handleBur={handleBlur}
-          setShowPassword={setShowPassword}
-          showPassword={showPassword}
-         />
-          {
-            errors.password &&  touched.password ? <InputError error={errors.password}/>: null      
-          }  
-        <button type='submit'>{loading?"Logging In":"Login"}</button>
-      </form>
-    </div>
-  )
-}
+    <FormCreator
+      formik={formik}
+      setShowPassword={setShowPassword}
+      loading={formStateHandler.loading}
+      errorMessage={formStateHandler.error}
+      showPassword={showPassword}
+      buttonText={formStateHandler.loading ? "Logging In" : "Login"}
+      inputs={inputs}
+    />
+  );
+};
 
-export default LoginForm
+export default LoginForm;

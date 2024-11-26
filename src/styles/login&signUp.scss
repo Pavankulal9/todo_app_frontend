@@ -1,14 +1,15 @@
 .form-body{
-    @include configWithHieight(80%,100%);
+    @include boxConfig(80%,100%);
     @include configFlex(center,center,column,1rem);
     > .logo{
-        @include configWithHieight(200px,200px);
+        @include boxConfig(200px,200px);
     }
     > .form{
-        @include configWithHieight(100%,auto);
+        @include boxConfig(100%,auto);
         @include configFlex(start,center,column,2rem);
+        overflow-x: auto;
         > .input-error{
-            @include configWithHieight(300px,auto);
+            @include boxConfig(300px,auto);
             padding-block: 0.5rem;
             border-radius: 5px;
             text-align: center;

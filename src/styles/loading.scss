@@ -1,5 +1,5 @@
 .loading{
-    @include configWithHieight(100%);
+    @include boxConfig(100%);
     @include configFlex();
     > h2{
         color: $text-color;
