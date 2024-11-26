@@ -1,5 +1,5 @@
 .form-body{
-    @include boxConfig(80%,100%);
+    @include boxConfig(95%,100%);
     @include configFlex(center,center,column,1rem);
     > .logo{
         @include boxConfig(200px,200px);

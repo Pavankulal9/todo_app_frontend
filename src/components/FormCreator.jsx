@@ -13,7 +13,8 @@ const FormCreator = ({
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     formik;
 
-  console.log(touched);
+  console.log(errorMessage, errors);
+
   return (
     <div className="form">
       {errorMessage && <Error error={errorMessage} />}

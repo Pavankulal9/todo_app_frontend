@@ -69,26 +69,21 @@ const SignUpForm = () => {
       } catch (error) {
         if (error.status === 401) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "User already exist!",
           });
         } else if (error.status === 400) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "All fields required!",
           });
         } else if (error.status === 500) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "Server Error try again!",
           });
         }
         console.error(error.message);
-      } finally {
-        setFormStateHandler({
-          ...formStateHandler,
-          loading: false,
-        });
       }
     },
   });

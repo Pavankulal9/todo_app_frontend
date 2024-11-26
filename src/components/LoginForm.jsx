@@ -55,34 +55,31 @@ const LoginForm = () => {
       } catch (error) {
         if (error.status === 401) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "User does not exist!",
           });
         } else if (error.status === 400) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "username and password missing!",
           });
         } else if (error.status === 500) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "Server Error",
           });
         } else if (error.status === 403) {
           setFormStateHandler({
-            ...formStateHandler,
+            loading: false,
             error: "Invalid Password!",
           });
         }
         console.error(error);
-      } finally {
-        setFormStateHandler({
-          ...formStateHandler,
-          loading: false,
-        });
       }
     },
   });
+
+  console.log(formStateHandler, "login");
 
   return (
     <FormCreator
