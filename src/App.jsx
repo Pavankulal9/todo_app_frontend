@@ -1,16 +1,15 @@
-import './styles/App.scss'
-import {Outlet} from 'react-router-dom';
-import Header from './layouts/Header';
+import "./styles/App.scss";
+import { Outlet } from "react-router-dom";
+import Header from "./layouts/Header";
 function App() {
-
   return (
-    <div className='body'>
-      <Header/>
-      <main className='container'>
-           <Outlet/>
+    <div className="body">
+      <Header />
+      <main className="container">
+        <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
