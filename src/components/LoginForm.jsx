@@ -79,8 +79,6 @@ const LoginForm = () => {
     },
   });
 
-  console.log(formStateHandler, "login");
-
   return (
     <FormCreator
       formik={formik}

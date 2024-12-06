@@ -40,7 +40,6 @@ export const loginRequest = async(username,password)=>{
 export const logoutRequest =async()=>{
     try {
         const response = await axiosPrivate.get(`/api/v1/users/logout`);
-        console.log(response);
         return response;
     } catch (error) {
         return Promise.reject(error);
